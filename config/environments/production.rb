@@ -66,7 +66,7 @@ Rails.application.configure do
     port:                 587,
     authentication:       :plain,
     enable_starttls_auto: true,
-    domain:               easy-lives0.herokuapp.com,
+    domain:               'easy-lives0.herokuapp.com',
     user_name:            ENV['SENDGRID_USERNAME'],
     password:             ENV['SENDGRID_PASSWORD']
   }
