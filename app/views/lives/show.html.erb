@@ -1,0 +1,21 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Assunto:</strong>
+  <%= @live.subject %>
+</p>
+
+<p>
+  <strong>Descrição:</strong>
+  <%= @live.description %>
+</p>
+
+<p>
+  <strong>Autor:</strong>
+  <%= @live.author.name %>
+</p>
+
+<% if @live.author == current_user %>
+  <td><%= link_to 'Editar', edit_live_path(@live) %></td>
+<% end %>
+<%= link_to 'Voltar', lives_path %>
