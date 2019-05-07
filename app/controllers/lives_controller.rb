@@ -29,6 +29,7 @@ class LivesController < ApplicationController
     if @live.save
       redirect_to @live, notice: 'Live was successfully created.'
     else
+      flash.now[:alert] = @live.errors.full_messages.to_sentence
       render :new
     end
   end
