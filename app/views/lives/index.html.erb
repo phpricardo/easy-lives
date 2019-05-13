@@ -16,21 +16,40 @@
       <tr>
         <td>
 
-          <span class='tag is-warning'><%= live.votes_count %></span>
+          <span class='tag is-info is-normal'><%= live.votes_count %></span>
 
+            <% if @voted_lives.include?(live) %>
+              <%= link_to '✓',
+              vote_path(live.votes.where(user: current_user).first),
+              method: :delete, class: 'button is-success is-small' %>
+            <% else %>
+              <%= link_to '✓', votes_path(live_id: live.id),
+              method: :post, class: 'button is-small' %>
+            <% end %>
+
+<%
+=begin%>
+ 
           <% if @voted_lives.include?(live) %>
-            <span class="icon has-text-success">
-              <i class="fas fa-check-square"></i>
-            </span>
 
-            <%= link_to 'Anular', votes_path(live_id: live.id), method: :delete,
-                class: 'button is-danger is-small' %>
+            <%= link_to 'x', vote_path(live.votes.where(user: current_user).first), 
+                method: :delete, class: 'button is-danger is-small' do %>
+
+              <span class="icon has-text-success">
+                <i class="fas fa-check-square"></i>
+              </span>
+
+            <% end %>
 
           <% else %>
             <%= link_to 'Votar', votes_path(live_id: live.id), method: :post, 
                 class: 'button is-danger is-outlined is-small' %>
-          <% end %>
+          <% end %> 
+<%
+=end%>
+        
         </td>
+
         <td><%= link_to live.subject, live %></td>
         <td><%= live.description %></td>
         <td><%= live.author.name %></td>

@@ -1,22 +1,22 @@
 class VotesController < ApplicationController
-    before_action :set_live, only: %i[create destroy]
+  before_action :set_live, only: %i[create]
 
-    def create
-       Vote.create! live: @live, user: current_user
+  def create
+    Vote.create! live: @live, user: current_user
 
-       redirect_to lives_path, notice: "Voto Registrado."
-    end
+    redirect_to lives_path, notice: 'Voto Registrado.'
+  end
 
-    def destroy
-    	@live.destroy!
+  def destroy
+    vote = Vote.find(params[:id])
+    vote.destroy!
 
-       redirect_to lives_path, notice: "Voto Removido."
-    end
+    redirect_to lives_path, notice: 'Voto Removido.'
+  end
 
+  private
 
-    private
-    
-    def set_live
-        @live = Live.find(params[:live_id])
-    end
+  def set_live
+    @live = Live.find(params[:live_id])
+  end
 end
