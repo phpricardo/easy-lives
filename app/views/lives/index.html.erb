@@ -4,9 +4,9 @@
   <thead>
     <tr>
       <th>Votar</th>
-      <th>Assunto</th>
-      <th>Descrição</th>
-      <th>Autor</th>
+      <th><%= t 'activerecord.attributes.live.subject' %></th>
+      <th><%= t 'activerecord.attributes.live.description' %></th>
+      <th><%= t 'activerecord.attributes.live.author' %></th>
       <th></th>
     </tr>
   </thead>
@@ -26,27 +26,6 @@
               <%= link_to '✓', votes_path(live_id: live.id),
               method: :post, class: 'button is-small' %>
             <% end %>
-
-<%
-=begin%>
- 
-          <% if @voted_lives.include?(live) %>
-
-            <%= link_to 'x', vote_path(live.votes.where(user: current_user).first), 
-                method: :delete, class: 'button is-danger is-small' do %>
-
-              <span class="icon has-text-success">
-                <i class="fas fa-check-square"></i>
-              </span>
-
-            <% end %>
-
-          <% else %>
-            <%= link_to 'Votar', votes_path(live_id: live.id), method: :post, 
-                class: 'button is-danger is-outlined is-small' %>
-          <% end %> 
-<%
-=end%>
         
         </td>
 
@@ -55,7 +34,7 @@
         <td><%= live.author.name %></td>
 
         <% if live.author == current_user %>
-          <td><%= link_to 'Edit', edit_live_path(live), class: 'button is-warning' %></td>
+          <td><%= link_to 'Editar', edit_live_path(live), class: 'button is-warning' %></td>
         <% end %>
       </tr>
     <% end %>
