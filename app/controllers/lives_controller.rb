@@ -3,7 +3,8 @@ class LivesController < ApplicationController
 
   # GET /lives
   def index
-    @lives = Live.all
+    @lives = Live.order(votes_count: :desc)
+    @voted_lives = current_user.voted_lives
   end
 
   # GET /lives/1
@@ -27,7 +28,7 @@ class LivesController < ApplicationController
     @live = Live.new(live_params.merge(author: current_user))
 
     if @live.save
-      redirect_to @live, notice: 'Live was successfully created.'
+      redirect_to @live, notice: 'Sugestão de Live foi criada com sucecsso.'
     else
       flash.now[:alert] = @live.errors.full_messages.to_sentence
       render :new
@@ -37,7 +38,7 @@ class LivesController < ApplicationController
   # PATCH/PUT /lives/1
   def update
     if @live.update(live_params)
-      redirect_to @live, notice: 'Live was successfully updated.'
+      redirect_to @live, notice: 'Sugestão de Live atualizada com sucesso.'
     else
       render :edit
     end
